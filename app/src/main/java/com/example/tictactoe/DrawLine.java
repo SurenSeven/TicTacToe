@@ -12,28 +12,22 @@ public class DrawLine extends View {
 
     private static final float LINE_WIDTH = 30.0f;
     private final Paint paint = new Paint();
-    protected Context context;
-    int[] startLocation, endLocation;
-
     private float startingX, startingY, endingX, endingY;
     private final Rect startRect, endRect;
 
 
     public DrawLine(Context context) {
         super(context);
-        this.context = context;
         startRect = new Rect();
         endRect = new Rect();
-        startLocation = new int[2];
-        endLocation = new int[2];
         paint.setColor(Color.RED);
         paint.setStrokeWidth(LINE_WIDTH);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.FILL);
         paint.setAlpha(90);
-
     }
 
+    //Unused - Needed if coordinates are set relative to the whole window
     public void setPointsRelativeToWindow(View startView, View endView) {
 
         startView.getGlobalVisibleRect(startRect);

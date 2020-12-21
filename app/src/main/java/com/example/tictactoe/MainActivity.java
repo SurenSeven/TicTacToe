@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
             {0, 4, 8}, {2, 4, 6}};
     int[] clickCounter;
+    private boolean isTie;
     final Map<int[], int[]> mapPositions = new HashMap<>();
 
     private void init() {
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         boardState = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
         gameOver = false;
         clickCounter = new int[]{0};
+        isTie=false;
         board.setVisibility(View.GONE);
         board.setInterceptTouchEvents(false);
     }
@@ -152,8 +154,10 @@ public class MainActivity extends AppCompatActivity {
                                 if (boardState[winningPosition[0]] == PLAYER1) {
 
                                     gameOverMessage.setText(R.string.player_O_won);
+                                    isTie=false;
                                 } else {
                                     gameOverMessage.setText(R.string.player_X_won);
+                                    isTie=false;
 
                                 }
                                 gameOverMessage.animate().alpha(1f).setDuration(500);
@@ -162,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (clickCounter[0] == 9) {
                             gameOver = true;
-                            if (gameOverMessage.getText().toString().isEmpty()) {
+                            if (!isTie) {
                                 gameOverMessage.setText(R.string.game_tied);
                             }
                             gameOverMessage.animate().alpha(1f).setDuration(500);
