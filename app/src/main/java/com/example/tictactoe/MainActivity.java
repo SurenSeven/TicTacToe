@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     final int PLAYER1 = 1;
     final int PLAYER2 = 2;
     int ACTIVE_PLAYER;
-    private int SETUP_BOARD = 0;
+    private int SETUP_BOARD;
     int[] boardState;
     boolean gameOver;
     final int[][] winningPositions = {
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     final Map<int[], int[]> mapPositions = new HashMap<>();
 
     private void init() {
+        SETUP_BOARD = 0;
         boardState = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
         gameOver = false;
         clickCounter = new int[]{0};
@@ -161,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (clickCounter[0] == 9) {
                             gameOver = true;
-                            gameOverMessage.setText(R.string.game_tied);
+                            if (gameOverMessage.getText().toString().isEmpty()) {
+                                gameOverMessage.setText(R.string.game_tied);
+                            }
                             gameOverMessage.animate().alpha(1f).setDuration(500);
 
                         }
@@ -179,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetBoard() {
-        SETUP_BOARD = 0;
         playAgainButton.animate().alpha(0f).setDuration(300);
         playAgainButton.setVisibility(View.INVISIBLE);
         headerText.animate().translationY(textY).setDuration(500);
