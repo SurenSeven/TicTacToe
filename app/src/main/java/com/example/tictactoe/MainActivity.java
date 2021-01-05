@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         boardState = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
         gameOver = false;
         clickCounter = new int[]{0};
-        isTie=false;
+        isTie = true;
         board.setVisibility(View.GONE);
         board.setInterceptTouchEvents(false);
     }
@@ -155,23 +155,19 @@ public class MainActivity extends AppCompatActivity {
                                 if (boardState[winningPosition[0]] == PLAYER1) {
 
                                     gameOverMessage.setText(R.string.player_O_won);
-                                    isTie=false;
-                                } else if(boardState[winningPosition[0]] == PLAYER2){
+                                    isTie = false;
+                                } else if (boardState[winningPosition[0]] == PLAYER2) {
                                     gameOverMessage.setText(R.string.player_X_won);
-                                    isTie=false;
+                                    isTie = false;
 
-                                }else {
-                                    isTie=true;
                                 }
                                 gameOverMessage.animate().alpha(1f).setDuration(500);
                                 break;
                             }
                         }
-                        if (clickCounter[0] == 9) {
+                        if (clickCounter[0] == 9 & isTie) {
                             gameOver = true;
-                            if (isTie) {
-                                gameOverMessage.setText(R.string.game_tied);
-                            }
+                            gameOverMessage.setText(R.string.game_tied);
                             gameOverMessage.animate().alpha(1f).setDuration(500);
 
                         }
