@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         drawLine = new DrawLine(MainActivity.this);
         boardContainer = findViewById(R.id.board_container);
         init();
+        //x,y coordinates of winning positions for drawling line across
         mapPositions.put(winningPositions[0], new int[]{0, 0, 2, 0});
         mapPositions.put(winningPositions[1], new int[]{0, 1, 2, 1});
         mapPositions.put(winningPositions[2], new int[]{0, 2, 2, 2});
@@ -155,10 +156,12 @@ public class MainActivity extends AppCompatActivity {
 
                                     gameOverMessage.setText(R.string.player_O_won);
                                     isTie=false;
-                                } else {
+                                } else if(boardState[winningPosition[0]] == PLAYER2){
                                     gameOverMessage.setText(R.string.player_X_won);
                                     isTie=false;
 
+                                }else {
+                                    isTie=true;
                                 }
                                 gameOverMessage.animate().alpha(1f).setDuration(500);
                                 break;
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if (clickCounter[0] == 9) {
                             gameOver = true;
-                            if (!isTie) {
+                            if (isTie) {
                                 gameOverMessage.setText(R.string.game_tied);
                             }
                             gameOverMessage.animate().alpha(1f).setDuration(500);
